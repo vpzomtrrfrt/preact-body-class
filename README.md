@@ -1,7 +1,7 @@
-React Document Title
+React Body ClassName
 ====================
 
-Provides a declarative way to specify `document.title` in a single-page app.  
+Provides a declarative way to specify `document.body.className` in a single-page app.  
 This component can be used on server side as well.
 
 Built with [React Side Effect](https://github.com/gaearon/react-side-effect).
@@ -11,7 +11,7 @@ Built with [React Side Effect](https://github.com/gaearon/react-side-effect).
 ## Installation
 
 ```
-npm install --save react-document-title
+npm install --save react-body-classname
 ```
 
 Dependencies: React >= 0.13.0
@@ -21,7 +21,7 @@ Dependencies: React >= 0.13.0
 * Does not emit DOM, not even a `<noscript>`;
 * Like a normal React compoment, can use its parent's `props` and `state`;
 * Can be defined in many places throughout the application;
-* Supports arbitrary levels of nesting, so you can define app-wide and page-specific titles;
+* Supports arbitrary levels of nesting, sucking up all the class names used;
 * Works just as well with isomorphic apps.
 
 ## Example
@@ -31,38 +31,22 @@ Assuming you use something like [react-router](https://github.com/rackt/react-ro
 ```javascript
 var App = React.createClass({
   render: function () {
-    // Use "My Web App" if no child overrides this
+    // Add "some class" to the body class name
     return (
-      <DocumentTitle title='My Web App'>
+      <BodyClassName className='some class'>
         <this.props.activeRouteHandler />
-      </DocumentTitle>
+      </BodyClassName>
     );
   }
 });
 
 var HomePage = React.createClass({
   render: function () {
-    // Use "Home" while this component is mounted
+    // Now it'll be "some class home"
     return (
-      <DocumentTitle title='Home'>
+      <BodyClassName className='home'>
         <h1>Home, sweet home.</h1>
-      </DocumentTitle>
-    );
-  }
-});
-
-var NewArticlePage = React.createClass({
-  mixins: [LinkStateMixin],
-
-  render: function () {
-    // Update using value from state while this component is mounted
-    return (
-      <DocumentTitle title={this.state.title || 'Untitled'}>
-        <div>
-          <h1>New Article</h1>
-          <input valueLink={this.linkState('title')} />
-        </div>
-      </DocumentTitle>
+      </BodyClassName>
     );
   }
 });
@@ -70,10 +54,6 @@ var NewArticlePage = React.createClass({
 
 ## Server Usage
 
-If you use it on server, call `DocumentTitle.rewind()` **after rendering components to string** to retrieve the title given to the innermost `DocumentTitle`. You can then embed this title into HTML page template.
+If you use it on server, call `BodyClassName.rewind()` **after rendering components to string** to retrieve the combined class name. You can then embed this className into HTML page template.
 
 Because this component keeps track of mounted instances, **you have to make sure to call `rewind` on server**, or you'll get a memory leak.
-
-## But What About Meta Tags?
-
-Looking for something more powerful? Check out [React Helmet](https://github.com/nfl/react-helmet)!
