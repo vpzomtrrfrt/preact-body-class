@@ -1,7 +1,7 @@
 {
-  "name": "react-document-title",
-  "version": "2.0.0",
-  "description": "A declarative, nested, stateful document.title for React",
+  "name": "react-body-classname",
+  "version": "1.0.0",
+  "description": "A declarative, nested way to manipulate your body's className",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -10,22 +10,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-document-title.git"
+    "url": "https://github.com/PactCoffee/react-body-classname"
   },
   "keywords": [
     "react",
     "component",
     "react-component",
-    "document.title",
+    "body.className",
     "title",
     "jsx"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Iestyn Williams <iest@me.com> (http://github.com/iest)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gaearon/react-document-title/issues"
+    "url": "https://github.com/PactCoffee/react-body-classname/issues"
   },
-  "homepage": "https://github.com/gaearon/react-document-title",
+  "homepage": "https://github.com/PactCoffee/react-body-classname",
   "devDependencies": {
     "expect.js": "^0.3.1",
     "global": "^4.3.0",
@@ -34,6 +34,7 @@
     "react": "^0.13.0"
   },
   "dependencies": {
+    "lodash.uniq": "^3.2.2",
     "react-side-effect": "^1.0.0"
   }
 }

@@ -1,22 +1,22 @@
 'use strict';
 
 var React = require('react'),
-    withSideEffect = require('react-side-effect');
+  uniq = require('lodash.uniq'),
+  withSideEffect = require('react-side-effect');
 
 function reducePropsToState(propsList) {
-  var innermostProps = propsList[propsList.length - 1];
-  if (innermostProps) {
-    return innermostProps.title;
-  }
+  return uniq(propsList.map(function(props) {
+    return props.className;
+  })).join(' ');
 }
 
-function handleStateChangeOnClient(title) {
-  document.title = title || '';
+function handleStateChangeOnClient(stringClassNames) {
+  document.body.className = stringClassNames || '';
 }
 
 var DocumentTitle = React.createClass({
   propTypes: {
-    title: React.PropTypes.string.isRequired
+    className: React.PropTypes.string.isRequired
   },
 
   render: function render() {

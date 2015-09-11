@@ -3,22 +3,22 @@
 'use strict';
 var expect = require('expect.js'),
     React = require('react'),
-    DocumentTitle = require('../');
+    BodyClassName = require('../');
 
-describe('DocumentTitle', function () {
+describe('BodyClassName', function () {
   before(function () {
-    DocumentTitle.canUseDOM = false;
+    BodyClassName.canUseDOM = false;
   });
 
   it('has a displayName', function () {
-    var el = React.createElement(DocumentTitle);
+    var el = React.createElement(BodyClassName);
     expect(el.type.displayName).to.be.a('string');
     expect(el.type.displayName).not.to.be.empty();
   });
   it('hides itself from the DOM', function () {
     var Component = React.createClass({
       render: function () {
-        return React.createElement(DocumentTitle, {title: 'irrelevant'},
+        return React.createElement(BodyClassName, {className: 'irrelevant'},
           React.createElement('div', null, 'hello')
         );
       }
@@ -29,7 +29,7 @@ describe('DocumentTitle', function () {
   it('throws an error if it has multiple children', function (done) {
     var Component = React.createClass({
       render: function () {
-        return React.createElement(DocumentTitle, {title: 'irrelevant'},
+        return React.createElement(BodyClassName, {className: 'irrelevant'},
           React.createElement('div', null, 'hello'),
           React.createElement('div', null, 'world')
         );
@@ -53,7 +53,7 @@ describe('DocumentTitle', function () {
     });
     var Component2 = React.createClass({
       render: function () {
-        return React.createElement(DocumentTitle, {title: 'irrelevant'},
+        return React.createElement(BodyClassName, {className: 'irrelevant'},
           React.createElement('div', null,
             React.createElement('div', null, 'a'),
             React.createElement('div', null, 'b'),
@@ -78,33 +78,36 @@ describe('DocumentTitle', function () {
   });
 });
 
-describe('DocumentTitle.rewind', function () {
+describe('BodyClassName.rewind', function () {
   it('clears the mounted instances', function () {
+    BodyClassName.rewind();
     React.renderToStaticMarkup(
-      React.createElement(DocumentTitle, {title: 'a'},
-        React.createElement(DocumentTitle, {title: 'b'}, React.createElement(DocumentTitle, {title: 'c'}))
+      React.createElement(BodyClassName, {className: 'a'},
+        React.createElement(BodyClassName, {className: 'b'},
+          React.createElement(BodyClassName, {className: 'c'}))
       )
     );
-    expect(DocumentTitle.peek()).to.equal('c');
-    DocumentTitle.rewind();
-    expect(DocumentTitle.peek()).to.equal(undefined);
+    expect(BodyClassName.peek()).to.equal('a b c');
+    BodyClassName.rewind();
+    expect(BodyClassName.peek()).to.equal(undefined);
   });
-  it('returns the latest document title', function () {
-    var title = 'cheese';
+  it('returns all the classNames used', function () {
     React.renderToStaticMarkup(
-      React.createElement(DocumentTitle, {title: 'a'},
-        React.createElement(DocumentTitle, {title: 'b'}, React.createElement(DocumentTitle, {title: title}))
+      React.createElement(BodyClassName, {className: 'one'},
+        React.createElement(BodyClassName, {className: 'two'},
+          React.createElement(BodyClassName, {className: 'three'}))
       )
     );
-    expect(DocumentTitle.rewind()).to.equal(title);
+    expect(BodyClassName.rewind()).to.equal('one two three');
   });
   it('returns undefined if no mounted instances exist', function () {
     React.renderToStaticMarkup(
-      React.createElement(DocumentTitle, {title: 'a'},
-        React.createElement(DocumentTitle, {title: 'b'}, React.createElement(DocumentTitle, {title: 'c'}))
+      React.createElement(BodyClassName, {className: 'a'},
+        React.createElement(BodyClassName, {className: 'b'},
+          React.createElement(BodyClassName, {className: 'c'}))
       )
     );
-    DocumentTitle.rewind();
-    expect(DocumentTitle.peek()).to.equal(undefined);
+    BodyClassName.rewind();
+    expect(BodyClassName.peek()).to.equal(undefined);
   });
 });
