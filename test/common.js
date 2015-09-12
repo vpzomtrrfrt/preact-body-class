@@ -15,6 +15,7 @@ describe('BodyClassName', function () {
     expect(el.type.displayName).to.be.a('string');
     expect(el.type.displayName).not.to.be.empty();
   });
+
   it('hides itself from the DOM', function () {
     var Component = React.createClass({
       render: function () {
@@ -26,6 +27,7 @@ describe('BodyClassName', function () {
     var markup = React.renderToStaticMarkup(React.createElement(Component));
     expect(markup).to.equal('<div>hello</div>');
   });
+
   it('throws an error if it has multiple children', function (done) {
     var Component = React.createClass({
       render: function () {
@@ -42,6 +44,7 @@ describe('BodyClassName', function () {
       done();
     });
   });
+  
   it('works with complex children', function () {
     var Component1 = React.createClass({
       render: function() {

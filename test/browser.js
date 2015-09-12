@@ -24,6 +24,7 @@ describe('BodyClassName (in a browser)', function () {
     delete global.document;
     delete console.debug;
   });
+
   it('changes the document body class name on mount', function (done) {
     var className = 'hello world';
     var Component = React.createClass({
@@ -37,7 +38,8 @@ describe('BodyClassName (in a browser)', function () {
     });
     React.render(React.createElement(Component), global.document.body);
   });
-  it('supports nesting', function (done) {
+
+  it('supports nesting, gathering all classNames used', function (done) {
     var called = false;
     var firstName = 'hello world';
     var Component1 = React.createClass({
