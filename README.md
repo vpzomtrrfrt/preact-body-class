@@ -21,35 +21,51 @@ Dependencies: React >= 0.13.0
 * Does not emit DOM, not even a `<noscript>`;
 * Like a normal React compoment, can use its parent's `props` and `state`;
 * Can be defined in many places throughout the application;
-* Supports arbitrary levels of nesting, sucking up all the class names used;
+* Supports arbitrary levels of nesting, combining each className;
 * Works just as well with isomorphic apps.
 
 ## Example
 
-Assuming you use something like [react-router](https://github.com/rackt/react-router):
-
-```javascript
-var App = React.createClass({
-  render: function () {
-    // Add "some class" to the body class name
-    return (
-      <BodyClassName className='some class'>
-        <this.props.activeRouteHandler />
-      </BodyClassName>
-    );
-  }
-});
-
-var HomePage = React.createClass({
-  render: function () {
-    // Now it'll be "some class home"
+```jsx
+class SomeComponent {
+  render() {
+    // This will add 'home' to the body
     return (
       <BodyClassName className='home'>
         <h1>Home, sweet home.</h1>
       </BodyClassName>
     );
   }
-});
+}
+
+class App {
+  render() {
+    // This will add 'app' to the body
+    return (
+      <BodyClassName className='app'>
+        <SomeComponent/>
+      </BodyClassName>
+    );
+    // Becuase we nested the component, our body will now have 'app home'
+    // as the class name
+  }
+}
+```
+
+Use CSS modules with webpack or similar?
+
+```jsx
+import styles from './some.css';
+
+class Thing {
+  render() {
+    return (
+      <BodyClassName className={styles.body}>
+        <h1>CSS modules rock!</h1>
+      </BodyClassName>
+    );
+  }
+}
 ```
 
 ## Server Usage
