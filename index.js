@@ -1,13 +1,14 @@
 'use strict';
 
 var React = require('react'),
-  uniq = require('lodash.uniq'),
   withSideEffect = require('react-side-effect');
 
 function reducePropsToState(propsList) {
-  return uniq(propsList.map(function(props) {
+  return propsList.map(function(props) {
     return props.className;
-  })).join(' ');
+  }).filter(function (value, index, self) {
+    return self.indexOf(value) === index;
+  }).join(' ');
 }
 
 function handleStateChangeOnClient(stringClassNames) {

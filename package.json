@@ -34,7 +34,6 @@
     "react": "^0.13.0"
   },
   "dependencies": {
-    "lodash.uniq": "^3.2.2",
     "react-side-effect": "^1.0.0"
   }
 }
