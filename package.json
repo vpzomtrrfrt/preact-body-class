@@ -4,7 +4,7 @@
   "description": "A declarative, nested way to manipulate your body's className",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/setup.js test/*.spec.js",
     "test:watch": "npm run test -- --watch",
     "lint": "jshint index.js test"
   },
@@ -27,13 +27,18 @@
   },
   "homepage": "https://github.com/PactCoffee/react-body-classname",
   "devDependencies": {
+    "enzyme": "^2.8.0",
     "expect.js": "^0.3.1",
     "global": "^4.3.0",
+    "jsdom": "^9.12.0",
     "jshint": "^2.5.6",
-    "mocha": "^2.0.1",
-    "react": "^0.13.0"
+    "mocha": "^3.2.0",
+    "react": "^15.5.3",
+    "react-addons-test-utils": "^15.5.1",
+    "react-dom": "^15.5.3"
   },
   "dependencies": {
+    "prop-types": "^15.5.6",
     "react-side-effect": "^1.0.0"
   }
 }
