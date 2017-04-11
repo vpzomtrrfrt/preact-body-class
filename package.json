@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PactCoffee/react-body-classname"
+    "url": "https://github.com/iest/react-body-classname"
   },
   "keywords": [
     "react",
@@ -23,9 +23,9 @@
   "author": "Iestyn Williams <iest@me.com> (http://github.com/iest)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PactCoffee/react-body-classname/issues"
+    "url": "https://github.com/iest/react-body-classname/issues"
   },
-  "homepage": "https://github.com/PactCoffee/react-body-classname",
+  "homepage": "https://github.com/iest/react-body-classname",
   "devDependencies": {
     "enzyme": "^2.8.0",
     "expect.js": "^0.3.1",
@@ -39,6 +39,6 @@
   },
   "dependencies": {
     "prop-types": "^15.5.6",
-    "react-side-effect": "^1.0.0"
+    "react-side-effect": "^1.1.0"
   }
 }
