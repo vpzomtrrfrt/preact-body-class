@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react'),
-  withSideEffect = require('react-side-effect'),
-  PropTypes = require('prop-types');
+var React = require('react');
+var withSideEffect = require('react-side-effect');
+var PropTypes = require('prop-types');
 
 function reducePropsToState(propsList) {
   return propsList.map(function(props) {
@@ -24,9 +24,7 @@ function DocumentTitle(props){
   }
 }
 
-
 DocumentTitle.displayName = 'DocumentTitle';
-
 DocumentTitle.propTypes = {
   className: PropTypes.string.isRequired
 };
