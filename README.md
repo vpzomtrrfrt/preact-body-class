@@ -1,75 +1,54 @@
-React Body ClassName
-====================
+# react-body-classname
 
-Provides a declarative way to specify `document.body.className` in a single-page app.  
-This component can be used on server side as well.
+Provides a declarative way to specify `document.body.className` in your react app. Supports server-side usage too.
 
 Built with [React Side Effect](https://github.com/gaearon/react-side-effect).
 
-====================
+---
 
-## Installation
+## Install
 
 ```
-npm install --save react-body-classname
+yarn add react-body-classname
 ```
 
 Dependencies: React >= 0.13.0
 
-## Features
-
-* Does not emit DOM, not even a `<noscript>`;
-* Like a normal React compoment, can use its parent's `props` and `state`;
-* Can be defined in many places throughout the application;
-* Supports arbitrary levels of nesting, combining each className;
-* Works just as well with isomorphic apps.
-
-## Example
+## What it looks like
 
 ```jsx
-class SomeComponent {
-  render() {
-    // This will add 'home' to the body
-    return (
-      <BodyClassName className='home'>
-        <h1>Home, sweet home.</h1>
-      </BodyClassName>
-    );
-  }
-}
+import BodyClassName from 'react-body-classname';
 
-class App {
-  render() {
-    // This will add 'app' to the body
-    return (
-      <BodyClassName className='app'>
-        <SomeComponent/>
+const Basic = () => (
+  <BodyClassName className="helloworld">
+    <h1>You ate a whole wheel of cheese?</h1>
+  </BodyClassName>
+);
+// -> document.body.className === "helloworld"
+
+const Nested = () => (
+  <BodyClassName className="outside">
+    <div>
+      <BodyClassName className="inside">
+        <p>I‘m not even mad</p>
       </BodyClassName>
-    );
-    // Becuase we nested the component, our body will now have 'app home'
-    // as the class name
-  }
-}
+    </div>
+  </BodyClassName>
+);
+// -> document.body.className === "outside inside"
+
+const GoCrazy = () => (
+  <BodyClassName className={Array(8).join(''/0) + ' batman!'}>
+    <h1>I'm impressed</h1>
+  </BodyClassName>
+);
+// -> document.body.className === "NaNNaNNaNNaNNaNNaNNaN batman!"
 ```
 
-Use CSS modules with webpack or similar?
-
-```jsx
-import styles from './some.css';
-
-class Thing {
-  render() {
-    return (
-      <BodyClassName className={styles.body}>
-        <h1>CSS modules rock!</h1>
-      </BodyClassName>
-    );
-  }
-}
-```
+**Note**: Only supports a single child as props.
 
 ## Server Usage
 
-If you use it on server, call `BodyClassName.rewind()` **after rendering components to string** to retrieve the combined class name. You can then embed this className into HTML page template.
+When using server-side, use `BodyClassName.rewind()` _after rendering components to string_ to retrieve the combined class name. Then chuck that into your HTML template.
 
-Because this component keeps track of mounted instances, **you have to make sure to call `rewind` on server**, or you'll get a memory leak.
+**Important**: This component keeps track of mounted instances, so if you don't call `BodyClassName.rewind()` you'll get a memory leak.
