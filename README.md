@@ -1,5 +1,10 @@
 # react-body-classname
 
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+[![Dependency status][david-dm-image]][david-dm-url]
+
+
 Provides a declarative way to specify `document.body.className` in your react app. Supports server-side usage too.
 
 Built with [React Side Effect](https://github.com/gaearon/react-side-effect).
@@ -52,3 +57,9 @@ const GoCrazy = () => (
 When using server-side, use `BodyClassName.rewind()` _after rendering components to string_ to retrieve the combined class name. Then chuck that into your HTML template.
 
 **Important**: This component keeps track of mounted instances, so if you don't call `BodyClassName.rewind()` you'll get a memory leak.
+
+[npm-url]: https://npmjs.org/package/react-body-classname
+[downloads-image]: http://img.shields.io/npm/dm/react-body-classname.svg
+[npm-image]: http://img.shields.io/npm/v/react-body-classname.svg
+[david-dm-url]:https://david-dm.org/iest/react-body-classname
+[david-dm-image]:https://david-dm.org/iest/react-body-classname.svg
