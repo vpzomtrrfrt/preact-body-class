@@ -16,7 +16,7 @@ function handleStateChangeOnClient(stringClassNames) {
   document.body.className = stringClassNames || '';
 }
 
-function DocumentTitle(props){
+function BodyClassName(props){
   if (props.children) {
     return React.Children.only(props.children);
   } else {
@@ -24,12 +24,12 @@ function DocumentTitle(props){
   }
 }
 
-DocumentTitle.displayName = 'DocumentTitle';
-DocumentTitle.propTypes = {
+BodyClassName.displayName = 'BodyClassName';
+BodyClassName.propTypes = {
   className: PropTypes.string.isRequired
 };
 
 module.exports = withSideEffect(
   reducePropsToState,
   handleStateChangeOnClient
-)(DocumentTitle);
+)(BodyClassName);
