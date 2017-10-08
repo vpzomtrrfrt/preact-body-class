@@ -19,7 +19,15 @@ describe('BodyClassName (in a browser)', function () {
     expect(global.document.body.className).to.equal(className);
   });
 
+  it('does not erase existing body class names', function () {
+    global.document.body.className = 'testing'
+    var className = 'hello world';
+    var Component = enzyme.mount(React.createElement(BodyClassName, {className: className}));
+    expect(global.document.body.className).to.equal('testing hello world');
+  });
+
   it('supports nesting, gathering all classNames used', function (done) {
+    global.document.body.className = ''
     var called = false;
     var firstName = 'hello world';
     var secondName = 'foo bar';
