@@ -8,6 +8,14 @@ function splitClassName(className) {
   return className.split(/\s+/);
 }
 
+function clean(classNames) {
+  return splitClassName(classNames)
+    .map(function(str) {
+      return str.trim();
+    })
+    .filter(Boolean);
+}
+
 function reducePropsToState(propsList) {
   return propsList
     .map(function(props) {
@@ -21,22 +29,16 @@ function reducePropsToState(propsList) {
 
 function handleStateChangeOnClient(stringClassNames) {
   // Find the classNames on the body that we haven't added
-  var currentClassNames = splitClassName(
-    document.body.className
-  ).filter(function(className) {
+  var untracked = clean(document.body.className).filter(function(className) {
     return BodyClassName.addedClassNames.indexOf(className) === -1;
   });
 
-  // Add "untracked" classNames with our classNames
-  var newClassNames = currentClassNames
-    .concat(splitClassName(stringClassNames))
-    .map(function(str) {
-      return str.trim();
-    })
-    .filter(Boolean)
-    .join(' ');
+  var ours = clean(stringClassNames);
+  BodyClassName.addedClassNames = ours;
 
-  BodyClassName.addedClassNames = newClassNames;
+  // Add "untracked" classNames with our classNames
+  var newClassNames = untracked.concat(ours).join(' ');
+
   document.body.className = newClassNames;
 }
 
