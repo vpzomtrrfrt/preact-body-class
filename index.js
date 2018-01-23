@@ -1,35 +1,36 @@
 'use strict';
 
-var React = require('react');
-var withSideEffect = require('react-side-effect');
-var PropTypes = require('prop-types');
+var preact = require('preact');
+var withSideEffect = require('preact-side-effect');
+var PropTypes = require('proptypes');
 
 function reducePropsToState(propsList) {
-  return propsList.map(function(props) {
-    return props.className;
-  }).filter(function (value, index, self) {
-    return self.indexOf(value) === index;
-  }).join(' ');
+	return propsList.map(function(props) {
+		return props.class;
+	}).filter(function (value, index, self) {
+		return self.indexOf(value) === index;
+	}).join(' ');
 }
 
 function handleStateChangeOnClient(stringClassNames) {
-  document.body.className = stringClassNames || '';
+	document.body.className = stringClassNames || '';
 }
 
-function BodyClassName(props){
-  if (props.children) {
-    return React.Children.only(props.children);
-  } else {
-    return null;
-  }
+function BodyClass(props){
+	if (props.children) {
+		if(props.children.length !== 1) throw new Error("Expected only one child of BodyClass");
+		return props.children;
+	} else {
+		return null;
+	}
 }
 
-BodyClassName.displayName = 'BodyClassName';
-BodyClassName.propTypes = {
-  className: PropTypes.string.isRequired
+BodyClass.displayName = 'BodyClass';
+BodyClass.propTypes = {
+	class: PropTypes.string.isRequired
 };
 
 module.exports = withSideEffect(
-  reducePropsToState,
-  handleStateChangeOnClient
-)(BodyClassName);
+	reducePropsToState,
+	handleStateChangeOnClient
+)(BodyClass);
