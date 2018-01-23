@@ -1,6 +1,5 @@
 'use strict';
 
-var preact = require('preact');
 var withSideEffect = require('preact-side-effect');
 var PropTypes = require('proptypes');
 
@@ -16,8 +15,9 @@ function handleStateChangeOnClient(stringClassNames) {
 	document.body.className = stringClassNames || '';
 }
 
-function BodyClass(props){
+function BodyClass(props) {
 	if (props.children) {
+		if(props.children.length === 0) return null;
 		if(props.children.length !== 1) throw new Error("Expected only one child of BodyClass");
 		return props.children;
 	} else {
@@ -27,7 +27,7 @@ function BodyClass(props){
 
 BodyClass.displayName = 'BodyClass';
 BodyClass.propTypes = {
-	class: PropTypes.string.isRequired
+	class: PropTypes.string
 };
 
 module.exports = withSideEffect(
